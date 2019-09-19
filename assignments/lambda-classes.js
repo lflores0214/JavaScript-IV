@@ -24,7 +24,15 @@ class Instructor extends Person {
         return `${student.name} recieves a perfect score on ${subject}`
     }//this end the grade
     gradePoints(student, min, max){
-        return `${student.name}'s grade is ${student.grade +- Math.floor(Math.random() *(max-min + 1)) + min }`
+        let studentGrade = Math.floor(Math.random() *(max-min + 1)) + min 
+        let variable = Math.random()
+        if (variable < .5){
+            studentGrade *= -1
+        } 
+        if (studentGrade < 0){
+            studentGrade = 0
+        }
+        return `${student.name}'s grade is ${student.grade += studentGrade}`
     }//this ends gradePoints
 
 }
@@ -78,7 +86,7 @@ const luis = new Student({
     previousBackground: 'Delivery Driver',
     className: 'Web24',
     favSubjects: ['HTML','CSS', 'JavaScript',],
-    grade: 100
+    grade: 0
 })
 
 

@@ -130,8 +130,9 @@ class Hero extends Humanoid{
     hit(amt) {
       this.healthPoints -= amt;
       if(this.healthPoints <= 0){
-        console.log(this.destroy())
-      }
+        return this.destroy()
+      } else {return `${this.name} took ${amt} damage`
+    }
   }
 }
   
@@ -147,8 +148,9 @@ class Villain extends Humanoid{
     hit(amt) {
         this.healthPoints -= amt;
         if(this.healthPoints <= 0){
-          console.log(this.destroy())
-        }
+          return this.destroy()
+        } else {return `${this.name} took ${amt} damage`
+      }
     }
 }
   
@@ -189,8 +191,8 @@ class Villain extends Humanoid{
   });
   console.log(demon.greet())
   console.log(slayer.greet())
-  console.log("Sir Bast was attacked by Molog Bal" + " "+ slayer.hit(5));
-  console.log("Sir Bast countered and attacks Molog Bal" + " " + demon.hit(20) + " " + "Critical Hit!")
-  console.log("Molog Bal stumbles");
-  console.log("Sir Bast attack Molog Bal" + demon.hit(7))
+  console.log("Molog Bal attacks Sir Bast!" + " "+ slayer.hit(5));
+  console.log("Sir Bast countered and attacks Molog Bal!" + " " + demon.hit(20) + " " + "Critical Hit!")
+  console.log("Molog Bal stumbles.");
+  console.log("Sir Bast attack Molog Bal!" + " " + demon.hit(7))
  
