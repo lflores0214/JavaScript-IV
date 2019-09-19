@@ -24,7 +24,7 @@ class Instructor extends Person {
         return `${student.name} recieves a perfect score on ${subject}`
     }//this end the grade
     gradePoints(student, min, max){
-        return `${student.name}'s grade is ${student.grade === Math.random() * (max-min) + min}`
+        return `${student.name}'s grade is ${student.grade +- Math.floor(Math.random() *(max-min + 1)) + min }`
     }//this ends gradePoints
 
 }
@@ -66,20 +66,42 @@ class ProjectManager extends Instructor{
     standUp(channel){
         return `${this.name} announces to ${channel}, @channel standy times!`
     }// this ends standUp
-    debugsCode(subject, student){
+    debugsCode(student, subject){
         return `${this.name} debugs ${student.name}'s code on ${subject}`
     }//this is the end of debugsCode
 }
 
-
 const luis = new Student({
     name: 'Luis',
     age: 27,
-    location: 'Denver',
+    location: 'Denver, CO',
     previousBackground: 'Delivery Driver',
     className: 'Web24',
-    favSubjects: ['HTML','CSS', 'JavaScript',]
+    favSubjects: ['HTML','CSS', 'JavaScript',],
+    grade: 100
 })
+
+const brit = new Instructor({
+    name:"Brit",
+    age:30,
+    location:"Canada", 
+    specialty:"javascript",
+    favLanguage:"javascript",
+    catchPhrase:"I'm just gonna pop this into Slack"
+})
+
+console.log(brit.name);
+console.log(brit.age);
+console.log(brit.location);
+console.log(brit.specialty);
+console.log(brit.favLanguage);
+console.log(brit.catchPhrase);
+console.log(brit.demo("LESS"));
+console.log(brit.score(luis, "Javascript"));
+console.log(brit.gradePoints(luis, 0, 100))
+
+
+
 console.log(luis.name);
 console.log(luis.age);
 console.log(luis.location);
@@ -88,7 +110,7 @@ console.log(luis.className);
 luis.listsSubjects();
 console.log(luis.sprintChallenge("javacript"))
 console.log(luis.PRAssignment("JavaScript-IV"))
-
+console.log(luis.graduate())
 // Stretch Problem
 // Extend the functionality of the Student by adding a prop called grade and setting it equal to a number between 1-100.
 
