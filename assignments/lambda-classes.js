@@ -81,11 +81,35 @@ const luis = new Student({
     grade: 100
 })
 
+
+const don = new ProjectManager({
+    name:"Don",
+    age:33,
+    location:"East Coast", 
+    specialty:"React",
+    favLanguage:"Python",
+    catchPhrase:"Let me just wave my hand so this works",
+    gradClassName: "Web??",
+    favInstructor: "Brit"
+})
+console.log(don.name);
+console.log(don.age);
+console.log(don.location);
+console.log(don.specialty);
+console.log(don.favLanguage);
+console.log(don.catchPhrase);
+console.log(don.gradClassName);
+console.log(don.favInstructor);
+console.log(don.standUp("Web24"));
+console.log(don.debugsCode(luis, "javascript"))
+
+
+
 const brit = new Instructor({
     name:"Brit",
     age:30,
     location:"Canada", 
-    specialty:"javascript",
+    specialty:"Web Development",
     favLanguage:"javascript",
     catchPhrase:"I'm just gonna pop this into Slack"
 })
@@ -98,7 +122,7 @@ console.log(brit.favLanguage);
 console.log(brit.catchPhrase);
 console.log(brit.demo("LESS"));
 console.log(brit.score(luis, "Javascript"));
-console.log(brit.gradePoints(luis, 0, 100))
+console.log(brit.gradePoints(luis, 1, 100))
 
 
 

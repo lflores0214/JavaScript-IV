@@ -127,9 +127,12 @@ class Hero extends Humanoid{
             (this.attack = actions.attack),
             (this.heal = actions.heal);
     }
-    atk() {
-        return `${this.name} attacks with ${this.attack}`;
-    }
+    hit(amt) {
+      this.healthPoints -= amt;
+      if(this.healthPoints <= 0){
+        console.log(this.destroy())
+      }
+  }
 }
   
  
@@ -141,8 +144,11 @@ class Villain extends Humanoid{
             (this.attack = actions.attack);
         (this.heal = actions.heal);
     }
-    atk() {
-        return `${this.name} strikes with ${this.attack}`;
+    hit(amt) {
+        this.healthPoints -= amt;
+        if(this.healthPoints <= 0){
+          console.log(this.destroy())
+        }
     }
 }
   
@@ -183,3 +189,8 @@ class Villain extends Humanoid{
   });
   console.log(demon.greet())
   console.log(slayer.greet())
+  console.log("Sir Bast was attacked by Molog Bal" + " "+ slayer.hit(5));
+  console.log("Sir Bast countered and attacks Molog Bal" + " " + demon.hit(20) + " " + "Critical Hit!")
+  console.log("Molog Bal stumbles");
+  console.log("Sir Bast attack Molog Bal" + demon.hit(7))
+ 
