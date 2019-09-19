@@ -1,4 +1,4 @@
-/* 
+/*
 
 Prototype Refactor
 
@@ -7,32 +7,35 @@ Prototype Refactor
 2. Your goal is to refactor all of this code to use ES6 Classes. The console.log() statements should still return what is expected of them.
 
 */
-function GameObject(att) {
-    (this.createdAt = att.createdAt),
-      (this.name = att.name),
-      (this.dimensions = att.dimensions);
-  }
+class GameObject {
+    constructor(att) {
+        (this.createdAt = att.createdAt),
+            (this.name = att.name),
+            (this.dimensions = att.dimensions);
+    }
+    destroy() {
+        return `${this.name} was removed from the game.`;
+    }
+}
   
-  GameObject.prototype.destroy = function() {
-    return `${this.name} was removed from the game.`;
-  };
   
-  /*
+/*
     === CharacterStats ===
     * healthPoints
     * takeDamage() // prototype method -> returns the string '<object name> took damage.'
     * should inherit destroy() from GameObject's prototype
   */
-  function CharacterStats(stats) {
-    GameObject.call(this, stats);
-    this.healthPoints = stats.healthPoints;
-  }
-  CharacterStats.prototype = Object.create(GameObject.prototype);
-  CharacterStats.prototype.takeDamage = function() {
-    return `${this.name} took damage.`;
-  };
+class CharacterStats extends GameObject{
+    constructor(stats) {
+        super(stats);
+        this.healthPoints = stats.healthPoints;
+    }
+    takeDamage() {
+        return `${this.name} took damage.`;
+    }
+}
   
-  /*
+/*
     === Humanoid (Having an appearance or character resembling that of a human.) ===
     * team
     * weapons
@@ -41,16 +44,17 @@ function GameObject(att) {
     * should inherit destroy() from GameObject through CharacterStats
     * should inherit takeDamage() from CharacterStats
   */
-  function Humanoid(att) {
-    CharacterStats.call(this, att)
-    this.team = att.team,
-      this.weapons = att.weapons,
-      this.language = att.language;
-  }
-  Humanoid.prototype = Object.create(CharacterStats.prototype)
-  Humanoid.prototype.greet = function() {
-   return `${this.name} offers a greeting in ${this.language}`;
-  };
+class Humanoid extends CharacterStats{
+    constructor(att) {
+        super(att)
+        this.team = att.team,
+            this.weapons = att.weapons,
+            this.language = att.language;
+    }
+    greet() {
+        return `${this.name} offers a greeting in ${this.language}`;
+    }
+}
   /*
    * Inheritance chain: GameObject -> CharacterStats -> Humanoid
    * Instances of Humanoid should have all of the same properties as CharacterStats and GameObject.
@@ -112,34 +116,35 @@ function GameObject(att) {
   console.log(mage.takeDamage()); // Bruce took damage.
   console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
   
-  // Stretch task:
-  // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.
-  // * Give the Hero and Villains different methods that could be used to remove health points from objects which could result in destruction if health gets to 0 or drops below 0;
-  // * Create two new objects, one a villain and one a hero and fight it out with methods!
+// Stretch task:
+// * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.
+// * Give the Hero and Villains different methods that could be used to remove health points from objects which could result in destruction if health gets to 0 or drops below 0;
+// * Create two new objects, one a villain and one a hero and fight it out with methods!
+class Hero extends Humanoid{
+    constructor(actions) {
+        super(actions);
+        (this.magic = actions.magic),
+            (this.attack = actions.attack),
+            (this.heal = actions.heal);
+    }
+    atk() {
+        return `${this.name} attacks with ${this.attack}`;
+    }
+}
   
+ 
   
-  function Hero(actions) {
-    Humanoid.call(this, actions);
-    (this.magic = actions.magic), 
-    (this.attack = actions.attack),
-    (this.heal = actions.heal)
-  }
-  
-  Hero.prototype = Object.create(Humanoid.prototype);
-  Hero.prototype.atk = function(){
-    return `${this.name} attacks with ${this.attack}`
-  }
-  
-  function Villain(actions) {
-    Humanoid.call(this, actions);
-    (this.magic = actions.magic), 
-    (this.attack = actions.attack);
-    (this.heal = actions.heal)
-  }
-  Villain.prototype = Object.create(Humanoid.prototype);
-  Villain.prototype.atk = function(){
-    return `${this.name} strikes with ${this.attack}`
-  }
+class Villain extends Humanoid{
+    constructor(actions) {
+        super(actions);
+        (this.magic = actions.magic),
+            (this.attack = actions.attack);
+        (this.heal = actions.heal);
+    }
+    atk() {
+        return `${this.name} strikes with ${this.attack}`;
+    }
+}
   
   const slayer = new Hero({
     createdAt: new Date(),
