@@ -1,1 +1,102 @@
 // CODE here for your Lambda Classes
+class Person {
+    constructor(att){
+        this.name = att.name,
+        this.age = att.age,
+        this.location = att.location;
+    }
+    speak(){
+        return `Hello, my name is ${this.name}, I am from ${this.location}`
+    }
+}
+
+class Instructor extends Person {
+    constructor(att){
+        super(att)
+        this.specialty = att.specialty,
+        this.favLanguage = att.favLanguage,
+        this.catchPhrase = att.catchPhrase;
+    }
+    demo(subject){
+        return `Today we are going to learn about ${subject}`
+    }//this ends the demo
+    score(student, subject){
+        return `${student.name} recieves a perfect score on ${subject}`
+    }//this end the grade
+    gradePoints(student, min, max){
+        return `${student.name}'s grade is ${student.grade === Math.random() * (max-min) + min}`
+    }//this ends gradePoints
+
+}
+
+class Student extends Person{
+    constructor(att){
+        super(att)
+        this.previousBackground = att.previousBackground,
+        this.className = att.className,
+        this.favSubjects = att.favSubjects,
+        this.grade = att.grade;
+    }
+    graduate(){
+        if(this.grade >= 70){
+            return `CONGRATULATIONS ${this.name}! You have graduated!`
+        }else {
+            return `You'll get it next time ${this.name}`
+        }
+    }//this is the end of graduate
+
+    PRAssignment (subject){
+        return `${this.name} has submitted a PR for ${subject}`
+    }//this is the end of PRAssignment
+    sprintChallenge(subject){
+        return `${this.name} has begun their sprint challenge on ${subject}`
+    }//this is the end of sprintchallenge
+    listsSubjects(){
+        return `${this.favSubjects.forEach(function(item){
+            console.log(item)})}`
+    }//this is the end of listsSubjects
+}
+
+class ProjectManager extends Instructor{
+    constructor(att){
+        super(att)
+        this.gradClassName = att.gradClassName,
+        this.favInstructor = att.favInstructor
+    }
+    standUp(channel){
+        return `${this.name} announces to ${channel}, @channel standy times!`
+    }// this ends standUp
+    debugsCode(subject, student){
+        return `${this.name} debugs ${student.name}'s code on ${subject}`
+    }//this is the end of debugsCode
+}
+
+
+const luis = new Student({
+    name: 'Luis',
+    age: 27,
+    location: 'Denver',
+    previousBackground: 'Delivery Driver',
+    className: 'Web24',
+    favSubjects: ['HTML','CSS', 'JavaScript',]
+})
+console.log(luis.name);
+console.log(luis.age);
+console.log(luis.location);
+console.log(luis.previousBackground);
+console.log(luis.className);
+luis.listsSubjects();
+console.log(luis.sprintChallenge("javacript"))
+console.log(luis.PRAssignment("JavaScript-IV"))
+
+// Stretch Problem
+// Extend the functionality of the Student by adding a prop called grade and setting it equal to a number between 1-100.
+
+// Now that our students have a grade build out a method on the Instructor (this will be used by BOTH instructors and PM's) that will randomly add or subtract points to a student's grade. Math.random will help.
+
+// Add a graduate method to a student.\
+
+// This method, when called, will check the grade of the student and see if they're ready to graduate from Lambda School
+
+// If the student's grade is above a 70% let them graduate! Otherwise go back to grading their assignments to increase their score.
+
