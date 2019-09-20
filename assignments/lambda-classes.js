@@ -24,15 +24,15 @@ class Instructor extends Person {
         return `${student.name} recieves a perfect score on ${subject}`
     }//this end the grade
     gradePoints(student, min, max){
-        let studentGrade = Math.floor(Math.random() *(max-min + 1)) + min 
+        let studentGrade = Math.floor(Math.random() * (max-min + 1)) + min 
         let variable = Math.random()
         if (variable < .5){
             studentGrade *= -1
         } 
         if (studentGrade < 0){
-            studentGrade = 0
-        }
-        return `${student.name}'s grade is ${student.grade += studentGrade}`
+           return `${student.name}'s grade is ${student.grade += studentGrade * -1}`
+        } else {
+        return `${student.name}'s grade is ${student.grade += studentGrade}`}
     }//this ends gradePoints
 
 }
@@ -49,7 +49,7 @@ class Student extends Person{
         if(this.grade >= 70){
             return `CONGRATULATIONS ${this.name}! You have graduated!`
         }else {
-            return `You'll get it next time ${this.name}`
+            return `Sorry, ${this.name} you'll get it next time.`
         }
     }//this is the end of graduate
 
